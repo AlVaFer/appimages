@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import fs from 'fs-extra';
 import path from 'path'
 import Jimp, { read } from 'jimp';
+import crypto from ('crypto');
 
 
 
@@ -40,7 +41,6 @@ export async function getPhotos(req: Request, res: Response): Promise<Response> 
 export async function createPhoto(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
    
-    const crypto = require('crypto');
     let md5 = crypto.createHash('md5').update(id).digest("hex");
 
     const image = await Jimp.read(`output/${id}.jpg`);
